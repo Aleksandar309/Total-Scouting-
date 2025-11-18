@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Scouting Database - Professional Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <svg class="login-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 2v20M2 12h20"></path>
+                </svg>
+                <h1>Football Scouting DB</h1>
+                <p>Professional Scouting Platform</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" class="form-control" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <div id="loginError" class="login-error hidden"></div>
+                <button type="submit" class="btn btn-primary btn-full">Login to Platform</button>
+            </form>
+            <div class="demo-accounts">
+                <p>Demo Accounts:</p>
+                <div class="demo-list">
+                    <span>admin / admin123</span>
+                    <span>milan_scout / scout123</span>
+                    <span>ana_analyst / analyst123</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="main-app hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <svg class="sidebar-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 2v20M2 12h20"></path>
+                </svg>
+                <span class="sidebar-title">Scouting DB</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-view="dashboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-view="players">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>Player Database</span>
+                </a>
+                <a href="#" class="nav-item" data-view="comparison">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    <span>Comparison Tool</span>
+                </a>
+                <a href="#" class="nav-item" data-view="reports">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <span>Scouting Reports</span>
+                </a>
+                <a href="#" class="nav-item" data-view="watchlists">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    <span>Watchlists</span>
+                </a>
+                <a href="#" class="nav-item" data-view="statistics">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>
+                    <span>Statistics</span>
+                </a>
+                <a href="#" class="nav-item" data-view="upload" id="uploadNav">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    <span>Upload Data</span>
+                </a>
+                <a href="#" class="nav-item" data-view="admin" id="adminNav">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"></path></svg>
+                    <span>Admin Panel</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="search-bar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+                    <input type="text" id="globalSearch" placeholder="Search players...">
+                </div>
+                <div class="top-bar-actions">
+                    <button class="icon-btn" id="notificationsBtn" title="Notifications">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="user-menu">
+                        <button class="user-menu-btn" id="userMenuBtn">
+                            <div class="user-avatar" id="userAvatar">A</div>
+                            <span id="userName">Admin</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="#" class="dropdown-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                Profile
+                            </a>
+                            <a href="#" class="dropdown-item" id="logoutBtn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Views -->
+            <div class="content-container">
+                <!-- Dashboard View -->
+                <div id="dashboardView" class="view-content active">
+                    <h2 class="view-title">Dashboard</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: var(--color-bg-1);">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <div class="stat-content">
+                                <p class="stat-label">Total Players</p>
+                                <p class="stat-value" id="statTotalPlayers">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: var(--color-bg-2);">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            </div>
+                            <div class="stat-content">
+                                <p class="stat-label">Scouting Reports</p>
+                                <p class="stat-value" id="statReports">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: var(--color-bg-3);">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </div>
+                            <div class="stat-content">
+                                <p class="stat-label">Watchlists</p>
+                                <p class="stat-value" id="statWatchlists">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: var(--color-bg-4);">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                            </div>
+                            <div class="stat-content">
+                                <p class="stat-label">Avg Rating</p>
+                                <p class="stat-value" id="statAvgRating">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="recent-activity">
+                            <h3>Recent Activity</h3>
+                            <div id="recentActivityList" class="activity-list"></div>
+                        </div>
+                        <div class="top-players">
+                            <h3>Top Rated Players</h3>
+                            <div id="topPlayersList" class="top-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Players View -->
+                <div id="playersView" class="view-content">
+                    <div class="view-header">
+                        <h2 class="view-title">Player Database</h2>
+                        <button class="btn btn-primary" id="addPlayerBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            Add Player
+                        </button>
+                    </div>
+                    <div class="filters-bar">
+                        <input type="text" id="playerSearch" class="form-control filter-input" placeholder="Search by name...">
+                        <select id="filterPosition" class="form-control filter-select">
+                            <option value="">All Positions</option>
+                            <option value="GK">GK</option>
+                            <option value="CB">CB</option>
+                            <option value="LB">LB</option>
+                            <option value="RB">RB</option>
+                            <option value="FB">FB</option>
+                            <option value="CDM">CDM</option>
+                            <option value="CM">CM</option>
+                            <option value="CAM">CAM</option>
+                            <option value="LW">LW</option>
+                            <option value="RW">RW</option>
+                            <option value="ST">ST</option>
+                        </select>
+                        <select id="filterClub" class="form-control filter-select">
+                            <option value="">All Clubs</option>
+                        </select>
+                        <button class="btn btn-secondary" id="clearFilters">Clear Filters</button>
+                        <button class="btn btn-secondary" id="exportPlayersBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            Export
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="playersTable">
+                            <thead>
+                                <tr>
+                                    <th data-sort="id">ID</th>
+                                    <th data-sort="name">Name</th>
+                                    <th data-sort="birth_year">Age</th>
+                                    <th data-sort="position">Position</th>
+                                    <th data-sort="club">Club</th>
+                                    <th data-sort="market_value">Market Value</th>
+                                    <th data-sort="rating">Rating</th>
+                                    <th data-sort="potential">Potential</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="playersTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Player Detail View -->
+                <div id="playerDetailView" class="view-content">
+                    <button class="btn btn-secondary back-btn" id="backToPlayers">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Back to Players
+                    </button>
+                    <div id="playerDetailContent"></div>
+                </div>
+
+                <!-- Comparison View -->
+                <div id="comparisonView" class="view-content">
+                    <h2 class="view-title">Player Comparison</h2>
+                    <div class="comparison-selector">
+                        <div class="selector-grid">
+                            <div class="selector-slot" data-slot="0">
+                                <button class="selector-btn" id="selectPlayer0">+ Select Player</button>
+                                <div class="selected-player hidden" id="selectedPlayer0"></div>
+                            </div>
+                            <div class="selector-slot" data-slot="1">
+                                <button class="selector-btn" id="selectPlayer1">+ Select Player</button>
+                                <div class="selected-player hidden" id="selectedPlayer1"></div>
+                            </div>
+                            <div class="selector-slot" data-slot="2">
+                                <button class="selector-btn" id="selectPlayer2">+ Select Player</button>
+                                <div class="selected-player hidden" id="selectedPlayer2"></div>
+                            </div>
+                            <div class="selector-slot" data-slot="3">
+                                <button class="selector-btn" id="selectPlayer3">+ Select Player</button>
+                                <div class="selected-player hidden" id="selectedPlayer3"></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="compareBtn" disabled>Compare Selected</button>
+                    </div>
+                    <div id="comparisonResults" class="comparison-results hidden"></div>
+                </div>
+
+                <!-- Reports View -->
+                <div id="reportsView" class="view-content">
+                    <div class="view-header">
+                        <h2 class="view-title">Scouting Reports</h2>
+                        <button class="btn btn-primary" id="createReportBtn">+ Create Report</button>
+                    </div>
+                    <div id="reportsList" class="reports-list"></div>
+                </div>
+
+                <!-- Watchlists View -->
+                <div id="watchlistsView" class="view-content">
+                    <div class="view-header">
+                        <h2 class="view-title">Watchlists</h2>
+                        <button class="btn btn-primary" id="createWatchlistBtn">+ Create Watchlist</button>
+                    </div>
+                    <div id="watchlistsContainer" class="watchlists-container"></div>
+                </div>
+
+                <!-- Statistics View -->
+                <div id="statisticsView" class="view-content">
+                    <h2 class="view-title">Statistics &amp; Analytics</h2>
+                    <div class="stats-tabs">
+                        <button class="stats-tab active" data-tab="overview">Overview</button>
+                        <button class="stats-tab" data-tab="positions">By Position</button>
+                        <button class="stats-tab" data-tab="leagues">League Analysis</button>
+                    </div>
+                    <div id="statsContent" class="stats-content"></div>
+                </div>
+
+                <!-- Upload View -->
+                <div id="uploadView" class="view-content">
+                    <h2 class="view-title">Upload Player Data</h2>
+                    <div class="upload-container">
+                        <div class="upload-zone" id="uploadZone">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                            <h3>Upload Excel/CSV File</h3>
+                            <p>Drag &amp; drop or click to browse</p>
+                            <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden>
+                        </div>
+                        <div id="uploadPreview" class="upload-preview hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Admin View -->
+                <div id="adminView" class="view-content">
+                    <h2 class="view-title">Admin Panel</h2>
+                    <div class="admin-tabs">
+                        <button class="admin-tab active" data-tab="users">User Management</button>
+                        <button class="admin-tab" data-tab="activity">Activity Log</button>
+                    </div>
+                    <div id="adminContent" class="admin-content"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="modalOverlay" class="modal-overlay hidden"></div>
+    
+    <!-- Player Selection Modal -->
+    <div id="playerSelectModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Select Player</h3>
+                <button class="modal-close" id="closePlayerSelect">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="modalPlayerSearch" class="form-control" placeholder="Search players...">
+                <div id="modalPlayerList" class="modal-player-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
